@@ -19,3 +19,21 @@ exports.createPost = async(req, res)=>{
 
     }
 }
+
+exports.getAllPost = async(req, res) =>{
+    try{
+        // const post = await post.find()// fetched all id 
+
+        const posts = await Post.find().populate("comment").exec();
+        res.json({
+            posts
+        })
+
+    }
+    catch(err){
+        return res.status(400).json({
+            error:"Error while fetching post"
+        });
+    }
+
+}
